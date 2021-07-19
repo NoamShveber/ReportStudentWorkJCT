@@ -156,7 +156,7 @@ def usernameAndPassword():
                   [sg.InputText(key='username', size=(30, 5), justification='center')],
                   [sg.Text(':סיסמה')],
                   [sg.InputText(key='password', justification='center', password_char='*', size=(30, 5))],
-                  [sg.Button("OK")]]
+                  [sg.Button("התחברות", bind_return_key=True)]]
 
     # Create the credWindow
     credWindow = sg.Window("JCTReportWork", credLayout, icon="icon.ico", element_justification='c', font='Heebo')
@@ -164,8 +164,8 @@ def usernameAndPassword():
     while True:
         event, values = credWindow.read()
         # End program if user closes credWindow or
-        # presses the OK button
-        if event == "OK":
+        # presses the התחברות button
+        if event == "התחברות":
             break
 
         if event == sg.WIN_CLOSED:
@@ -201,9 +201,9 @@ def main():
               [sg.In(key='-cal-', enable_events=True, visible=False),
                sg.CalendarButton('בחר תאריך', format='%d.%m.%Y', close_when_date_chosen=True, locale='he_IL', key='cal',
                                  target='-cal-')],
-              [sg.Text(':שעת התחלה 1')],
+              [sg.Text('שעת התחלה 1: (חובה)')],
               [sg.InputText(key='beginTime1', size=(30, 5), justification='center')],
-              [sg.Text(':שעת סיום 1')],
+              [sg.Text('שעת סיום 1: (חובה)')],
               [sg.InputText(key='endTime1', size=(30, 5), justification='center', )],
               [sg.Text(':שעת התחלה 2')],
               [sg.InputText(key='beginTime2', size=(30, 5), justification='center', )],
@@ -211,7 +211,7 @@ def main():
               [sg.InputText(key='endTime2', size=(30, 5), justification='center', )],
               [sg.Text(':הערות')],
               [sg.InputText(key='comment', size=(30, 5), justification='center', )],
-              [sg.Button("שמירה")]]
+              [sg.Button("שמירה", bind_return_key=True)]]
 
     repWindow = sg.Window("JCTReportWork", layout, icon="icon.ico", element_justification='c', font='Heebo')
 
