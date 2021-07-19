@@ -237,7 +237,7 @@ def main():
                 continue
 
             if repWindow['-cal-'].get() == '' or not parseDate(repWindow['-cal-'].get()):
-                sg.popup_ok('.נא לבחור תאריך תקין')
+                sg.popup_ok('.נא לבחור תאריך תקין, בין ה21 בחודש שעבר ל21 בחודש הנוכחי')
                 continue
 
             if repWindow['beginTime1'].get() == '' or not parseHour(repWindow['beginTime1'].get()) or \
