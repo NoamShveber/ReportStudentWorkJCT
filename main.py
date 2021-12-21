@@ -11,7 +11,8 @@ headers = {'user-agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KH
 vpnLoginUrl = 'https://lev.jct.ac.il/dana-na/auth/url_1/login.cgi'
 studentWorkLoginUrl = 'https://lev.jct.ac.il/,DanaInfo=student-work.jct.ac.il,SSL,dom=1,CT=sxml+login'
 attendanceUrl = 'https://lev.jct.ac.il/students/,DanaInfo=student-work.jct.ac.il,SSL+attendance'
-fetchEmploymentsUrl = 'https://lev.jct.ac.il/students/attendance/,DanaInfo=student-work.jct.ac.il,SSL,dom=1,CT=sxml+employee'
+fetchEmploymentsUrl = 'https://lev.jct.ac.il/students/attendance/,DanaInfo=student-work.jct.ac.il,SSL,dom=1,' \
+                      'CT=sxml+employee '
 
 data = {'tz_offset': '',
         'realm': 'ACAD',
@@ -35,10 +36,12 @@ sg.theme('DarkAmber')
 def parseHour(hourStr):
     if hourStr == '':
         return True
-
     try:
-        hours = int(hourStr[0:2])
-        minutes = int(hourStr[3:5])
+        try:
+            hours = int(hourStr[0:2])  # HH:MM
+        except ValueError:
+            hours = int(hourStr[0:1])  # H:MM
+        minutes = int(hourStr[2:5])
         if hours > 24 or hours < 0 or minutes > 60 or minutes < 0:
             return None
 
@@ -213,7 +216,7 @@ def main():
               [sg.InputText(key='comment', size=(30, 5), justification='center', )],
               [sg.Button("שמירה", bind_return_key=True)]]
 
-    repWindow = sg.Window("JCTReportWork", layout, icon="icon.ico", element_justification='c', font='Heebo')
+    repWindow = sg.Window("JCTReportWork", layout, icon="icon.ico", element_justification='c', font='Calibri')
 
     while True:
         event, values = repWindow.read()
